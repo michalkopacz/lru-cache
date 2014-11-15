@@ -63,6 +63,11 @@ class LruCache
         unset($this->data[$key]);
     }
 
+    public function clean()
+    {
+        $this->data = array();
+    }
+
     /**
      * Remove key from beginning of array.
      */
