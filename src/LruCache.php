@@ -3,7 +3,7 @@
 namespace MichalKopacz\LruCache;
 
 /**
- * This cache use 
+ * This cache use php array linked list functionality to keep keys in the order of use
  *
  * @author Michał Kopacz
  */
@@ -51,7 +51,7 @@ class LruCache
             return;
         }
 
-        if (count($this->data) === $this->size) {
+        if ($this->isLimitReached()) {
             $this->removeEarliestUsedKey();
         }
 
@@ -63,15 +63,29 @@ class LruCache
         unset($this->data[$key]);
     }
 
+    /**
+     * Remove key from beginning of array.
+     */
     protected function removeEarliestUsedKey()
     {
         array_shift($this->data);
     }
 
+    /**
+     * Move key to end of array.
+     *
+     * @param mixed $key
+     * @param mixed $value
+     */
     protected function changeKeyToLastUsed($key, $value)
     {
         unset($this->data[$key]);
 
         $this->data[$key] = $value;
+    }
+
+    protected function isLimitReached()
+    {
+        return count($this->data) >= $this->size;
     }
 }
