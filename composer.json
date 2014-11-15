@@ -10,5 +10,17 @@
 
     "require-dev": {
         "phpunit/phpunit": "~4"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "MichalKopacz\\LruCache\\": "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "MichalKopacz\\LruCache\\Tests\\": "tests/unit/"
+        }
     }
 }
