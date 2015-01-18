@@ -89,6 +89,28 @@ class LruCacheTest extends  \PHPUnit_Framework_TestCase
 
         $this->assertNull($this->lruCache->get('bar'));
     }
+    
+    public function testArrayAccess()
+    {
+        $this->lruCache['foo'] = 1;
+        
+        $this->assertSame(1, $this->lruCache['foo']);
+        
+        $this->assertTrue(isset($this->lruCache['foo']));
+        
+        unset($this->lruCache['foo']);
+        
+        $this->assertFalse(isset($this->lruCache['foo']));
+        
+        $this->assertNull($this->lruCache->get('foo'));
+    }
+    
+    public function testIssetIsFalseForNullValue()
+    {
+        $this->lruCache['foo'] = null;
+        
+        $this->assertFalse(isset($this->lruCache['foo']));
+    }
 
     public function invalidKeysProvider()
     {

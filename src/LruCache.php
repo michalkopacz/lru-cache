@@ -7,8 +7,12 @@ namespace MostSignificantBit\LruCache;
  *
  * @author Michał Kopacz
  */
-class LruCache
+class LruCache implements \ArrayAccess
 {
+    /**
+     *
+     * @var int 
+     */
     protected $size;
 
     /**
@@ -43,7 +47,7 @@ class LruCache
     {
         $this->checkKeyIsValid($key);
         
-        if (array_key_exists($key, $this->data)) {
+        if (!array_key_exists($key, $this->data)) {
             return $default;
         }
 
@@ -84,6 +88,8 @@ class LruCache
      */
     public function remove($key)
     {
+        $this->checkKeyIsValid($key);
+        
         unset($this->data[$key]);
     }
 
@@ -93,6 +99,43 @@ class LruCache
     public function clean()
     {
         $this->data = array();
+    }
+    
+    /**
+     * 
+     * @param mixed $offset
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->data[$offset]);
+    }
+
+    /**
+     * 
+     * @param mixed $offset
+     */
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    /**
+     * 
+     * @param int|string $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
+
+    /**
+     * 
+     * @param mixed $offset
+     */
+    public function offsetUnset($offset)
+    {
+        $this->remove($offset);
     }
 
     /**
