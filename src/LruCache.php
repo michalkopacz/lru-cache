@@ -18,6 +18,11 @@ class LruCache
      */
     protected $data = array();
 
+    /**
+     * 
+     * @param int $size
+     * @throws \InvalidArgumentException
+     */
     public function __construct($size)
     {
         if (!is_int($size) || (int)$size <= 0) {
@@ -27,8 +32,16 @@ class LruCache
         $this->size = (int)$size;
     }
 
+    /**
+     * 
+     * @param int|string $key
+     * @return mixed
+     * @throws \InvalidArgumentException
+     */
     public function get($key)
     {
+        $this->checkKeyIsValid($key);
+        
         if (!array_key_exists($key, $this->data)) {
             throw new \InvalidArgumentException('Key not exists');
         }
@@ -40,11 +53,14 @@ class LruCache
         return $value;
     }
 
+    /**
+     * 
+     * @param int|string $key
+     * @param mixed $value
+     */
     public function set($key, $value)
     {
-        if (!is_string($key) && !is_int($key)) {
-            throw new \InvalidArgumentException('Only string and integer is valid key type');
-        }
+        $this->checkKeyIsValid($key);
 
         if (array_key_exists($key, $this->data)) {
             $this->changeKeyToLastUsed($key, $value);
@@ -58,6 +74,10 @@ class LruCache
         $this->data[$key] = $value;
     }
 
+    /**
+     * 
+     * @param int|string $key
+     */
     public function remove($key)
     {
         unset($this->data[$key]);
@@ -92,5 +112,17 @@ class LruCache
     protected function isLimitReached()
     {
         return count($this->data) >= $this->size;
+    }
+    
+    /**
+     * 
+     * @param mixed $key
+     * @throws \InvalidArgumentException
+     */
+    protected function checkKeyIsValid($key)
+    {
+        if (!is_string($key) && !is_int($key)) {
+            throw new \InvalidArgumentException('Only string and integer is valid key type');
+        }
     }
 }
