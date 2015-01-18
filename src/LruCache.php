@@ -33,6 +33,7 @@ class LruCache
     }
 
     /**
+     * Retrieve an value for specified key.
      * 
      * @param int|string $key
      * @return mixed
@@ -54,6 +55,8 @@ class LruCache
     }
 
     /**
+     * Add value of specified key.
+     * If key exist, it repleace value.
      * 
      * @param int|string $key
      * @param mixed $value
@@ -75,6 +78,7 @@ class LruCache
     }
 
     /**
+     * Remove value of specified key.
      * 
      * @param int|string $key
      */
@@ -83,6 +87,9 @@ class LruCache
         unset($this->data[$key]);
     }
 
+    /**
+     * Clean all cached data.
+     */
     public function clean()
     {
         $this->data = array();
