@@ -1,6 +1,6 @@
 <?php
 
-namespace MichalKopacz\LruCache;
+namespace MostSignificantBit\LruCache;
 
 /**
  * This cache use php array linked list functionality to keep keys in the order of use

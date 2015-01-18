@@ -1,5 +1,5 @@
 {
-    "name": "michalkopacz/lru-cache",
+    "name": "most-significant-bit/lru-cache",
     "authors": [
         {
             "name": "Michal Kopacz",
@@ -14,13 +14,13 @@
 
     "autoload": {
         "psr-4": {
-            "MichalKopacz\\LruCache\\": "src/"
+            "MostSignificantBit\\LruCache\\": "src/"
         }
     },
 
     "autoload-dev": {
         "psr-4": {
-            "MichalKopacz\\LruCache\\Tests\\": "tests/unit/"
+            "MostSignificantBit\\LruCache\\Tests\\": "tests/unit/"
         }
     }
 }

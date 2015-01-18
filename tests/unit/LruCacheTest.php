@@ -1,8 +1,8 @@
 <?php
 
-namespace MichalKopacz\LruCache\Tests;
+namespace MostSignificantBit\LruCache\Tests;
 
-use MichalKopacz\LruCache\LruCache;
+use MostSignificantBit\LruCache\LruCache;
 
 class LruCacheTest extends  \PHPUnit_Framework_TestCase
 {
