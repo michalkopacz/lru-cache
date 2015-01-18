@@ -39,12 +39,12 @@ class LruCache
      * @return mixed
      * @throws \InvalidArgumentException
      */
-    public function get($key)
+    public function get($key, $default = null)
     {
         $this->checkKeyIsValid($key);
         
         if (!array_key_exists($key, $this->data)) {
-            throw new \InvalidArgumentException('Key not exists');
+            return $default;
         }
 
         $value = $this->data[$key];

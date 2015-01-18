@@ -46,12 +46,9 @@ class LruCacheTest extends  \PHPUnit_Framework_TestCase
         new LruCache($key);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testKeyValueIsNotSet()
     {
-        $value = $this->lruCache->get('foo');
+        $this->assertNull($this->lruCache->get('foo'));
     }
 
     public function testOverflowCacheRemoveEarliestUsedKey()
@@ -60,13 +57,8 @@ class LruCacheTest extends  \PHPUnit_Framework_TestCase
         $this->lruCache->set('bar', 2);
         $this->lruCache->set('baz', 3);
         $this->lruCache->set('buz', 4);
-
-        try {
-            $this->lruCache->get('foo');
-
-            throw new \Exception('Failed asserting that exception of type "\InvalidArgumentException" is thrown.');
-        } catch (\InvalidArgumentException $e) {}
-
+   
+        $this->assertNull($this->lruCache->get('foo'));
         $this->assertSame(2, $this->lruCache->get('bar'));
         $this->assertSame(3, $this->lruCache->get('baz'));
         $this->assertSame(4, $this->lruCache->get('buz'));
@@ -85,9 +77,6 @@ class LruCacheTest extends  \PHPUnit_Framework_TestCase
         $this->assertSame(3, $this->lruCache->get('bar'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testGetEarliestUsedKeyIsRemoved()
     {
         $this->lruCache->set('foo', 1);
@@ -98,7 +87,7 @@ class LruCacheTest extends  \PHPUnit_Framework_TestCase
 
         $this->lruCache->set('buz', 4);
 
-        $this->lruCache->get('bar');
+        $this->assertNull($this->lruCache->get('bar'));
     }
 
     public function invalidKeysProvider()
