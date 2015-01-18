@@ -43,7 +43,7 @@ class LruCache
     {
         $this->checkKeyIsValid($key);
         
-        if (!array_key_exists($key, $this->data)) {
+        if (array_key_exists($key, $this->data)) {
             return $default;
         }
 
@@ -65,7 +65,7 @@ class LruCache
     {
         $this->checkKeyIsValid($key);
 
-        if (array_key_exists($key, $this->data)) {
+        if (isset($this->data[$key]) || array_key_exists($key, $this->data)) {
             $this->changeKeyToLastUsed($key, $value);
             return;
         }
