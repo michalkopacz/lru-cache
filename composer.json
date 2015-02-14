@@ -1,6 +1,7 @@
 {
     "name": "most-significant-bit/lru-cache",
     "description": "LRU cache implementation in PHP",
+    "license": "MIT",
     "keywords": ["php", "lru", "cache", "lru cache"],
     "authors": [
         {
